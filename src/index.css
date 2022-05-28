@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');;
+
+*{
+  font-family: 'Poppins', Arial, Helvetica !important;
+}
+p,h1,h2,h3,h4,h5,td,th,.rbc-header button span,.rbc-label{
+  font-family: 'Poppins', Arial, Helvetica !important;
+  color: #001234;
+}
+.rbc-toolbar button{
+  color: #001234 !important;
+}
+
+
+body {
+  margin: 0;
+  background-color: #F0F0F0 !important;
+  color: #001234;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+button:focus {
+  outline: none !important;
+}
+*:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/************* CALENDAR **************/
+.rbc-month-row{
+  cursor: pointer !important;
+}
+
+.rbc-btn-group button{
+  color: #001234 !important;
+}
+.rbc-allday-cell{
+  display: none !important;
+  border: none !important;
+  border-top: none !important;
+  padding-top: 0px !important;
+}
+
+.rbc-time-header-content, .rbc-month-header{
+  background-color: #ccc;
+}
+
+.rbc-header{
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rbc-header + .rbc-header{
+  border: none !important;
+}
+
+.rbc-header {
+  font-weight: normal !important;
+}
+
+.rbc-today {
+  background-color: #fcfcfc;
+  /* border-color:#ccc */
+}
+/*
+.rbc-today .rbc-timeslot-group{
+  border-color:#ccc
+}
+.rbc-today .rbc-timeslot-group .rbc-time-slot{
+  border-color:#ccc
+}
+*/
+.rbc-off-range .rbc-button-link{
+  color: #ccc !important;
+}
+
+.rbc-current-time-indicator{
+  background-color: #FF7C02;
+}
+
+.rbc-toolbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.rbc-btn-group.btn-select-view{
+  border: 2px solid rgba(115, 122, 135) !important;
+  border-radius: 10px !important;
+  padding: 0px !important;
+  overflow: hidden !important;
+}
+
+.btn-hoy{
+  border: 2px solid rgba(115, 122, 135) !important;
+  border-radius: 10px !important;
+}
+
+.rbc-btn-group button{
+  border: none !important;
+  margin: 0px !important;
+}
+
+.rbc-btn-group button.btn-mes{
+  border-radius: 8px 0px 0px 8px !important;
+}
+.rbc-btn-group button.btn-agenda{
+  border-radius: 0px 8px 8px 0px !important;
+}
+
+.rbc-btn-group button.btn-dia,.rbc-btn-group button.btn-semana,.rbc-btn-group button.btn-mes{
+  border-right: 2px solid rgba(115, 122, 135) !important;
+}
+
+.btn-select-view .active{
+  background: #0258FF !important;
+  color: white !important;
+}
+.btn-select-view button:hover {
+  background: #749FF2 !important;
+  color: white !important;
+}
+
+.toolbar-left span, .toolbar-left p{
+  font-weight: bold !important;
+  font-size: x-large;
+}
+
+/***************** CURSOR POINTER *************************/
+.cursor{
+  cursor: pointer;
+}
+
+/***************** CHAKRA-UI SWITCH *************************/
+
+/* .css-5eload[aria-checked=true], .css-5eload[data-checked]{
+  background: #42C74F !important;
+}
+
+/******************* SVG **********************************/
+.svg-blue path{
+  color: #0258FF !important;
+}
+.svg-orange path{
+  color: #FF7C02 !important;
+}
+.svg-green path{
+  color: #42C74F !important;
+}
+.svg-red path{
+  color: red !important;
+}
+.svg-darkblue path{
+  color: #001234 !important;
+}
+.svg-white path{
+  color: white !important;
+}
