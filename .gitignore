@@ -12,7 +12,7 @@
 /build
 
 # global
-/src/environment/global.js
+#/src/environment/global.js
 
 # misc
 .DS_Store
