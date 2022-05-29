@@ -9,7 +9,7 @@ function Nextsidebar({nextEvents}){
     return(
         <>
         <Box my='5'>
-            <Heading size='lg' my='5' >Para hoy: </Heading>
+            <Heading size='lg' my='5' minW='150px' >Para hoy </Heading>
             {nextEvents.map(event=>
             <Flex key={event.id} className={'evento-' + event.id}>
                 <Box p='3' bg='white' my='6' width="280px" boxShadow='xl' borderColor="gray.300" rounded="lg" >

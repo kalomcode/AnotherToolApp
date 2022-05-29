@@ -5,7 +5,7 @@ import { Calendar, Views, DateLocalizer } from 'react-big-calendar'
 import Toolbar from "react-big-calendar/lib/Toolbar";
 import Nextsidebar from '../components/Nextsidebar'
 import {Drawer, DrawerOverlay,DrawerContent, useDisclosure, Box} from '@chakra-ui/react'
-import { Flex, button} from '@chakra-ui/react'
+import { Flex, Button} from '@chakra-ui/react'
 import EventForm from '../forms/EventForm'
 import useApi from '../hooks/useApi';
 import eventsApi from '../api/eventsApi';
@@ -182,8 +182,13 @@ export default function CalendarComp({localizer}) {
 
   return (
     <>
-    <Flex w="100%" p="5" gap={6}>
-        <Nextsidebar nextEvents={nextEvents} />    
+    <Flex w="100%" p="5" m='5' gap={6}>
+      <Flex flexDirection='column'>
+        <Box>
+          <Button variant='primary-s' onClick={()=>{handleSelectSlot({start:'',end:''})}}>+ Añadir cita</Button>
+        </Box>
+        <Nextsidebar nextEvents={nextEvents} />  
+      </Flex>  
       <Calendar
       dayLayoutAlgorithm={'no-overlap'} //algoritmo no overlappin
       defaultDate={defaultDate}
@@ -223,9 +228,11 @@ export default function CalendarComp({localizer}) {
       <Drawer placement='right'  onClose={handleClose} initialFocusRef={titleInput} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
+          <Box>
           <EventForm onClose={onClose} handleClose={handleClose} is_creating={creating} event={event} events={myEvents} 
           servicelist={services} clientlist={clients} 
           setEvents={setEvents} updateEvents={updateEvents} updateNextEvents={updateNextEvents}/>
+          </Box>
         </DrawerContent>
       </Drawer>    
       </>
@@ -293,21 +300,23 @@ const CustomToolbar = (toolbar) => {
   }
 
   return (
-      <div className='rbc-toolbar'>
-        <span className="rbc-btn-group toolbar-left">
-          <Flex>
-            <span className="cursor" onClick={goToBack}>&lt;</span>
-            <Flex align='center' className="rbc-toolbar-label"><p>{capitalizarPrimeraLetra(toolbar.label)}</p></Flex>
-            <span className="cursor" onClick={goToNext}>&gt;</span>
-          </Flex>
-        </span>
-        <button type="button" className="btn-hoy" onClick={goToCurrent}>Hoy</button>
-        <span className="rbc-btn-group btn-select-view">
-          <button type="button" className="btn-mes" onClick={goToMonthView}>Mes</button>
-          <button type="button" className="btn-semana active" onClick={goToWeekView}>Semana</button>
-          <button type="button" className="btn-dia" onClick={goToDayView}>Día</button>
-          <button type="button" className="btn-agenda" onClick={goToAgendaView}>Agenda</button>
-        </span>
-      </div>
+      <Box pb='35px'>
+        <div className='rbc-toolbar'>
+          <span className="rbc-btn-group toolbar-left">
+            <Flex>
+              <span className="cursor" onClick={goToBack}>&lt;</span>
+              <Flex align='center' className="rbc-toolbar-label"><p>{capitalizarPrimeraLetra(toolbar.label)}</p></Flex>
+              <span className="cursor" onClick={goToNext}>&gt;</span>
+            </Flex>
+          </span>
+          <button type="button" className="btn-hoy" onClick={goToCurrent}>Hoy</button>
+          <span className="rbc-btn-group btn-select-view">
+            <button type="button" className="btn-mes" onClick={goToMonthView}>Mes</button>
+            <button type="button" className="btn-semana active" onClick={goToWeekView}>Semana</button>
+            <button type="button" className="btn-dia" onClick={goToDayView}>Día</button>
+            <button type="button" className="btn-agenda" onClick={goToAgendaView}>Agenda</button>
+          </span>
+        </div>
+      </Box>
   );
 };

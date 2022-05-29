@@ -21,6 +21,7 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
   const[client, setClient] = useState()
   const[price, setPrice] = useState()
   const[note, setNote] = useState()
+  const[duration, setDuration] = useState()
 
   const[clients, setClients] = useState(clientlist)
   const toast = useToast()
@@ -31,12 +32,14 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
   const deleteEventApi = useApi(eventsApi.deleteEvent);
 
   useEffect(() => {
+    console.log(event)
     if(event !== undefined){
         setTitle(event.title)
         setService(event.service)
         setClient(event.client)
         setPrice(event.extraprice)
         setNote(event.note)
+        getDuration()
     }
     else{
     setTitle()
@@ -55,6 +58,7 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
   const handleSubmit = async (e) => {    
     setLoadingCreate(true)
     e.preventDefault()
+    console.log('handl',event)
     const eventToCreate ={
             'start': moment(event.start),
             'end': moment(event.end),
@@ -115,10 +119,13 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
     closeDrawer()    
   }
     // Event duration calculator
-  function duration(){
+  function getDuration(){
     const d = moment.duration(moment(event.end).diff(moment(event.start)))
     const formated = (d.get('hours') + 'h ' + d.get('minutes') + 'min')
-    return (<p>{formated}</p>)
+    console.log('****::',d,formated,d.isValid())
+    d.isValid()
+      ? setDuration(formated)
+      : setDuration('0h 0min')
   }
   function getClientName(id){
     try {
@@ -154,7 +161,7 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
   const isClientError = client === undefined
   const submitAvailable = isServiceError && isClientError
   return (
-    <>
+    <Box>
     <DrawerHeader> 
       <Flex px='3' justify='space-between' >
       <Text>{is_creating? 'Nueva Cita': 'Editar Cita'} </Text> 
@@ -193,17 +200,17 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
         </Stack> 
         {event &&  
         <Flex direction='column' gap='2' my='6' >
-        <Flex align='center' justify='start' gap={3}> <SvgTime/>  <Text>{duration()}</Text> </Flex>                 
-        <Text> IN  {moment(event.start).format("DD/MM/YYYY, hh:mm")} </Text>
-        <Text> OUT {moment(event.end).format("DD/MM/YYYY hh:mm")}</Text>
+        <Flex align='center' justify='start' gap={3}> <SvgTime/>  <Text>{duration}</Text> </Flex>                 
         <Box rounded="lg" border="2px" p="2px">
           <Flex justifyContent="space-between">
             <Text mr="3px" ml="3px"> IN : </Text>
             <Flatpickr
               data-enable-time
-              value={''}
+              value={event.start}
               onChange={(newdate) => {
                 console.log(newdate)
+                event.start = newdate[0];
+                getDuration()
               }}
             />
           </Flex>
@@ -213,9 +220,11 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
             <Text mr="3px" ml="3px"> OUT : </Text>
             <Flatpickr
               data-enable-time
-              value={''}
+              value={event.end}
               onChange={(newdate) => {
                 console.log(newdate)
+                event.end = newdate[0];
+                getDuration()
               }}
             />
           </Flex>
@@ -245,6 +254,6 @@ export default function EventForm({is_creating, updateEvents, updateNextEvents, 
               <Button colorScheme='orange' size='sm' onClick={handleSubmit} isLoading={loadingCreate} isDisabled={submitAvailable} loadingText='Guardando'>  Crear </Button>
         </Flex> 
         </DrawerFooter>   
-      </>
+      </Box>
     )
 }
